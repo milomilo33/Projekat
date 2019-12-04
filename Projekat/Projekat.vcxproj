@@ -18,6 +18,21 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Courses.cpp" />
+    <ClCompile Include="GroupOfStudents.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="Student.cpp" />
+    <ClCompile Include="StudentCourses.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Courses.h" />
+    <ClInclude Include="GroupOfStudents.h" />
+    <ClInclude Include="Menu.h" />
+    <ClInclude Include="Student.h" />
+    <ClInclude Include="StudentCourses.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{640BEA0B-8B0B-4AE9-86C6-C177C12B20BD}</ProjectGuid>
@@ -142,21 +157,6 @@
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\..\grp_projekat\grp_projekat\src\Courses.cpp" />
-    <ClCompile Include="..\..\..\..\grp_projekat\grp_projekat\src\GroupOfStudents.cpp" />
-    <ClCompile Include="..\..\..\..\grp_projekat\grp_projekat\src\main.cpp" />
-    <ClCompile Include="..\..\..\..\grp_projekat\grp_projekat\src\Menu.cpp" />
-    <ClCompile Include="..\..\..\..\grp_projekat\grp_projekat\src\Student.cpp" />
-    <ClCompile Include="..\..\..\..\grp_projekat\grp_projekat\src\StudentCourses.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\..\grp_projekat\grp_projekat\src\Courses.h" />
-    <ClInclude Include="..\..\..\..\grp_projekat\grp_projekat\src\GroupOfStudents.h" />
-    <ClInclude Include="..\..\..\..\grp_projekat\grp_projekat\src\Menu.h" />
-    <ClInclude Include="..\..\..\..\grp_projekat\grp_projekat\src\Student.h" />
-    <ClInclude Include="..\..\..\..\grp_projekat\grp_projekat\src\StudentCourses.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
