@@ -15,10 +15,13 @@
 
 class StudentCourses
 {
-	// add required members
+	Student student;
+	Courses courses;
 public:
-
+	StudentCourses() {};
 	Student get_student() const { return student; }
+	double get_final_score();
+	void display();
 };
 
 #endif

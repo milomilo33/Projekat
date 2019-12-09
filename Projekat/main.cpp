@@ -8,6 +8,9 @@
 
 #include "Menu.h"
 #include <iostream>
+#include <string>         
+#include <locale>        
+#include <sstream> 
 
 using namespace std;
 
@@ -15,6 +18,7 @@ int main()
 {
 	Menu m;
 	int option;
+	locale loc;
 	m.display_menu();
 	
 	do
@@ -26,7 +30,7 @@ int main()
 			{
 				cin.clear();	// we’d like to look at the characters
 				char ch;
-				while (cin>>ch && !isdigit(ch))
+				while (cin>>ch && !isdigit(ch,loc))
 				{
 					cerr << "Invalid input; please try again" << endl;
 					cout << "> ";

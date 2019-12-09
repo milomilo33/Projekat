@@ -27,7 +27,7 @@ public:
 		InvalidFile(): runtime_error("Invalid input file name") {}
 	};
 
-	enum OPTIONS{ INFO=1, READ_FILE, DISPLAY, DISPLAY_SORTED, HIGHEST, EXIT }; 
+	enum OPTIONS{ INFO=1, READ_FILE=2, DISPLAY=3, DISPLAY_SORTED=4, HIGHEST=5, EXIT=9 }; 
 		
 private:
 	GroupOfStudents gs;
