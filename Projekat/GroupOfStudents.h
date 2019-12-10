@@ -25,7 +25,7 @@ public:
 	GroupOfStudents(vector< StudentCourses >& v);
 	const vector<StudentCourses>& get_student_courses() const;
 	void display();
-	void sort(); // ovde je sortiranje po prez pa imenu pa ID
+	void sort(int , int); // ovde je sortiranje po prez pa imenu pa ID
 	void display_sorted();
 	void display_highest();
 	void write_to_file(); // za txt

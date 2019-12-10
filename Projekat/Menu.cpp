@@ -18,6 +18,7 @@ void Menu::display_menu() const{
 	std::cout << "6. Prikazi informacije o svim studentima" << std::endl;
 	std::cout << "7. Upisi studente u izlaznu datoteku" << std::endl;
 	std::cout << "8. Izlaz iz programa" << std::endl;
+	
 }
 
 void Menu::display_info() const {
