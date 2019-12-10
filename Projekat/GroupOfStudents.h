@@ -18,14 +18,18 @@ using std::vector;
 class GroupOfStudents
 {
 private:
+	vector<StudentCourses> st_vec;
 	void search_for_highest(vector<int>& indices_max) const; // utility
-
 public:
 	GroupOfStudents() {}
-	GroupOfStudents(const vector< StudentCourses >& v);
-
-	// add required methods
+	GroupOfStudents(vector< StudentCourses >& v);
 	const vector<StudentCourses>& get_student_courses() const;
+	void display();
+	void sort(); // ovde je sortiranje po prez pa imenu pa ID
+	void display_sorted();
+	void display_highest();
+	void write_to_file(); // za txt
+	void write_to_bin(); // za bin
 };
 
 #endif /*GROUPOFSTUDENTS_H_*/

@@ -19,9 +19,10 @@ class StudentCourses
 	Courses courses;
 public:
 	StudentCourses() {};
-	Student get_student() const { return student; }
+	Student get_student() const;
 	double get_final_score();
 	void display();
+	bool operator<=(StudentCourses sc);
 };
 
 #endif

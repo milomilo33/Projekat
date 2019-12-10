@@ -43,5 +43,5 @@ void Courses::calc_letter_grade() {
 }
 
 void Courses::display() const {
-	std::cout << final_score << " " << letter_grade << std::endl;
+	std::cout << "Broj bodova: " << final_score << " Ocena: " << letter_grade << std::endl;
 }
