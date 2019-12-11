@@ -34,7 +34,7 @@ private:
 	bool binary_write;
 	
 public:
-	Menu();
+	Menu() {};
 
 	bool is_id_valid(string id) const;
 	void display_menu() const;
