@@ -7,6 +7,11 @@
 //============================================================================
 #include "Menu.h"
 #include <iostream>
+#include <regex>
+#include <fstream>
+#include <sstream>
+#include <vector>
+#include "Courses.h"
 
 void Menu::display_menu() const{
 	std::cout << "Izaberite jednu od opcija:" << std::endl;
@@ -26,4 +31,98 @@ void Menu::display_info() const {
 	std::cout << "Jovin Vladimir, SW-30-2018" << std::endl;
 	std::cout << "Petljanski Jovan, SW-31-2018" << std::endl;
 	std::cout << "Milovanovic Milovan, SW-41-2018\n" << std::endl;
+}
+
+bool Menu::is_id_valid(string id) const {
+	std::regex r("[a-zA-Z]{2}\\d+\/\\d{4}");
+	return std::regex_match(id, r);
+}
+
+//trenutno cita samo txt fajlove
+void Menu::read_students() {
+	//hard-coded filename
+	std::ifstream infile("example.txt");
+
+	if (infile.is_open()) {
+		std::vector<StudentCourses> st_vec;
+		string line1;
+		while (std::getline(infile, line1)) {
+			string line2, line3, line4;
+
+			if (!std::getline(infile, line2)) throw InvalidData();
+			if (!std::getline(infile, line3)) throw InvalidData();
+			if (!std::getline(infile, line4)) throw InvalidData();
+
+			std::stringstream line1ss(line1);
+			std::stringstream line2ss(line2);
+			std::stringstream line3ss(line3);
+			std::stringstream line4ss(line4);
+
+			int word_count = 0;
+			string word;
+			string firstName, lastName, sID;
+			while (line1ss >> word) {
+				word_count++;
+				if (word_count == 1)
+					firstName = word;
+				else if (word_count == 2)
+					lastName = word;
+				else if (word_count == 3)
+					sID = word;
+			}
+			if (word_count != 3 || !is_id_valid(sID)) throw InvalidData();
+			Student stud(firstName, lastName, sID);
+
+			std::vector<int> homework;
+			while (line2ss >> word) {
+				try {
+					int ocena = std::stoi(word);
+					if (ocena < 0 || ocena > 100) throw InvalidData();
+					homework.push_back(ocena);
+				}
+				catch (...) {
+					throw InvalidData();
+				}
+			}
+			if (homework.size() != Courses::NUM_HW) throw InvalidData();
+
+			std::vector<int> test;
+			while (line3ss >> word) {
+				try {
+					int ocena = std::stoi(word);
+					if (ocena < 0 || ocena > 100) throw InvalidData();
+					test.push_back(ocena);
+				}
+				catch (...) {
+					throw InvalidData();
+				}
+			}
+			if (test.size() != Courses::NUM_TESTS) throw InvalidData();
+
+			std::vector<int> quiz;
+			while (line4ss >> word) {
+				try {
+					int ocena = std::stoi(word);
+					if (ocena < 0 || ocena > 100) throw InvalidData();
+					quiz.push_back(ocena);
+				}
+				catch (...) {
+					throw InvalidData();
+				}
+			}
+			if (quiz.size() != Courses::NUM_QUIZZES) throw InvalidData();
+
+			Courses cour(quiz, homework, test);
+			cour.calc_final_score();
+			cour.calc_letter_grade();
+
+			StudentCourses sc(stud, cour);
+			st_vec.push_back(sc);
+		}
+		infile.close();
+		if (st_vec.size() == 0) throw InvalidData();
+		gs = GroupOfStudents(st_vec);
+	}
+	
+	else throw InvalidFile();
 }

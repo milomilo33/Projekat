@@ -31,9 +31,10 @@ public:
 		
 private:
 	GroupOfStudents gs;
+	bool isbin;
 
 public:
-	Menu();
+	Menu() {}
 
 	bool is_id_valid(string id) const;
 	void display_menu() const;
