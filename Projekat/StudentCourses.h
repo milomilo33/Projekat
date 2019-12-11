@@ -22,6 +22,7 @@ public:
 	StudentCourses(Student& s, Courses& c) : student(s), courses(c) {}
 	Student get_student() const;
 	Courses get_courses() const;
+
 	double get_final_score();
 	void display();
 	bool operator<=(StudentCourses sc);

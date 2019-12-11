@@ -81,7 +81,7 @@ void GroupOfStudents::write_to_file() {
 
 char* string_to_char(string s) {
 	char c[100];
-	for (int i;i < s.size();i++) {
+	for (int i=0;i < s.size();i++) {
 		*(c + i) = s[i];
 	}
 	return c;
@@ -107,4 +107,20 @@ void GroupOfStudents::write_to_bin() {
 		f.write((char*)&c, sizeof(char));
 	}
 	f.close();
+}
+
+int GroupOfStudents::get_st_vec_size()
+{
+	return st_vec.size();
+}
+
+void GroupOfStudents::display_student(string input)
+{
+	for (StudentCourses sc : st_vec) {
+		if (sc.get_student().get_id() == input) {
+			sc.get_student().display();
+			return;
+		}
+	}
+	return;
 }

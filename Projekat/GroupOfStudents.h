@@ -29,6 +29,8 @@ public:
 	void display_highest();
 	void write_to_file(); // za txt
 	void write_to_bin(); // za bin
+	int get_st_vec_size();
+	void display_student(string);
 };
 
 #endif /*GROUPOFSTUDENTS_H_*/
