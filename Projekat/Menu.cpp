@@ -7,6 +7,16 @@
 //============================================================================
 #include "Menu.h"
 #include <iostream>
+#include <string>
+
+Menu::Menu()
+{
+}
+
+bool Menu::is_id_valid(string id) const
+{
+	return false;
+}
 
 void Menu::display_menu() const{
 	std::cout << "Izaberite jednu od opcija:" << std::endl;
@@ -27,3 +37,32 @@ void Menu::display_info() const {
 	std::cout << "Petljanski Jovan, SW-31-2018" << std::endl;
 	std::cout << "Milovanovic Milovan, SW-41-2018\n" << std::endl;
 }
+
+void Menu::read_students()
+{
+	//UCITAVANJE STUDENATA
+}
+
+void Menu::display_students()
+{
+	this->gs.display();
+}
+
+void Menu::display_student()
+{
+	string input;
+	cin << input;
+	this->gs.display_student(input);
+}
+
+void Menu::display_students_sorted() 
+{
+	this->gs.display_sorted();
+}
+
+void Menu::display_highest_score() 
+{
+	this->gs.display_highest();
+}
+
+

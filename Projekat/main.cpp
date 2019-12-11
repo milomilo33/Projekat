@@ -11,6 +11,7 @@
 #include <string>         
 #include <locale>        
 #include <sstream> 
+#include <regex>
 
 using namespace std;
 
@@ -26,6 +27,7 @@ int main()
 		cout << "> ";
 		while (!(cin >> option) || option < 1 || option > Menu::EXIT)
 		{
+
 			if (cin.fail())	// we found something that wasn’t an integer
 			{
 				cin.clear();	// we’d like to look at the characters
