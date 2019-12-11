@@ -36,6 +36,7 @@ public:
 		: quiz(q), homework(h), test(t), final_score(0), letter_grade('F') {}
 
 	// utility functions
+	char get_letter_grade() const;
 	double get_final_score() const;
 	void display() const;
 	void calc_final_score();

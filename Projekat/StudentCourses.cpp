@@ -26,3 +26,7 @@ bool StudentCourses::operator<=(StudentCourses sc) {
 	else
 		return false;
 }
+
+Courses StudentCourses::get_courses() const{
+	return courses;
+}

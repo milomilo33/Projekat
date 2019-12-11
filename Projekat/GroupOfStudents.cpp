@@ -6,6 +6,7 @@
 // Description : C++ group project
 //============================================================================
 #include "GroupOfStudents.h"
+#include <fstream>
 
 GroupOfStudents::GroupOfStudents(vector< StudentCourses >& v) {
 	st_vec = v;
@@ -48,19 +49,36 @@ void GroupOfStudents::sort(int start, int end)
 }
 
 void GroupOfStudents::display_sorted() {
-	this->sort(0, st_vec.size());
-	this->display();
-
+	GroupOfStudents gs_tmp;
+	gs_tmp.st_vec = st_vec;
+	gs_tmp.sort(0, st_vec.size());
+	gs_tmp.display();
 }
 
 void GroupOfStudents::display_highest() {
-
+	double max = 0;
+	for (int i = 0;i < st_vec.size();i++) {
+		if (st_vec[i].get_final_score > max)
+			max = st_vec[i].get_final_score;
+	}
+	for (int i = 0;i < st_vec.size();i++) {
+		if (st_vec[i].get_final_score == max)
+			st_vec[i].display();
+	}
 }
 
 void GroupOfStudents::write_to_file() {
-
+	string path = "Prosek_Student.txt";
+	std::ofstream f;
+	f.open(path);
+	for (int i = 0; i < st_vec.size(); i++)
+	{
+		f << st_vec[i].get_student().get_id() << " " << st_vec[i].get_student().get_first_name() << " " << st_vec[i].get_student().get_last_name() << " " << st_vec[i].get_courses().get_final_score() << " " << st_vec[i].get_courses().get_letter_grade() << "\n";
+	}
+	f.close();
 }
 
 void GroupOfStudents::write_to_bin() {
+	std::ofstream f("Prosek_Student_Binarno.bin", std::ios::binary);
 
 }
