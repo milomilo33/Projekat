@@ -7,6 +7,7 @@
 //============================================================================
 #include "GroupOfStudents.h"
 #include <fstream>
+#include <cstring>
 
 GroupOfStudents::GroupOfStudents(vector< StudentCourses >& v) {
 	st_vec = v;
@@ -58,11 +59,11 @@ void GroupOfStudents::display_sorted() {
 void GroupOfStudents::display_highest() {
 	double max = 0;
 	for (int i = 0;i < st_vec.size();i++) {
-		if (st_vec[i].get_final_score > max)
-			max = st_vec[i].get_final_score;
+		if (st_vec[i].get_final_score() > max)
+			max = st_vec[i].get_final_score();
 	}
 	for (int i = 0;i < st_vec.size();i++) {
-		if (st_vec[i].get_final_score == max)
+		if (st_vec[i].get_final_score() == max)
 			st_vec[i].display();
 	}
 }
@@ -78,7 +79,32 @@ void GroupOfStudents::write_to_file() {
 	f.close();
 }
 
+char* string_to_char(string s) {
+	char c[100];
+	for (int i;i < s.size();i++) {
+		*(c + i) = s[i];
+	}
+	return c;
+}
+
 void GroupOfStudents::write_to_bin() {
 	std::ofstream f("Prosek_Student_Binarno.bin", std::ios::binary);
-
+	for (int i = 0; i < st_vec.size(); i++)
+	{
+		string s = st_vec[i].get_student().get_id();
+		char* tmp;
+		tmp = string_to_char(s);
+		f.write(tmp, sizeof(char[100]));
+		s = st_vec[i].get_student().get_first_name();
+		tmp = string_to_char(s);
+		f.write(tmp, sizeof(char[100]));
+		s = st_vec[i].get_student().get_last_name();
+		tmp = string_to_char(s);
+		f.write(tmp, sizeof(char[100]));
+		double sc = st_vec[i].get_courses().get_final_score();
+		f.write((char*)&sc,sizeof(double));
+		char c = st_vec[i].get_courses().get_letter_grade();
+		f.write((char*)&c, sizeof(char));
+	}
+	f.close();
 }

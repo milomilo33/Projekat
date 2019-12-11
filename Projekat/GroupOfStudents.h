@@ -19,7 +19,6 @@ class GroupOfStudents
 {
 private:
 	vector<StudentCourses> st_vec;
-	void search_for_highest(vector<int>& indices_max) const; // utility
 public:
 	GroupOfStudents() {}
 	GroupOfStudents(vector< StudentCourses >& v);
