@@ -54,6 +54,7 @@ int main()
 		case Menu::READ_FILE:
 			try
 			{
+				//dodati proveru tipa ulazne datoteka, i u zavisnosti od toga pozvati metode za citanje
 				m.read_students();
 			} catch (const Menu::InvalidFile& excp)
 			{
@@ -64,6 +65,9 @@ int main()
 			}
 			break;
 		case Menu::DISPLAY:
+			m.display_student();
+			break;
+		case Menu::DISPLAY_STUDENTS:
 			m.display_students();
 			break;
 		case Menu::DISPLAY_SORTED:
@@ -71,6 +75,9 @@ int main()
 			break;   
 		case Menu::HIGHEST:
 			m.display_highest_score();
+			break;
+		case Menu::WRITE_FILE:
+			//dodati writeove...
 			break;
 		}
 		m.display_menu();

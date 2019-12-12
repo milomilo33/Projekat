@@ -40,6 +40,7 @@ public:
 	void display_menu() const;
 	void display_info() const;
 	void read_students();
+	void read_students_binary();
 	void display_students();
 	void display_student();
 	void display_students_sorted();
