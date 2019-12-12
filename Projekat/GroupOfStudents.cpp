@@ -50,12 +50,12 @@ void GroupOfStudents::sort(int start, int end)
 }
 
 void GroupOfStudents::display_sorted() {
-	/*GroupOfStudents gs_tmp;
+	GroupOfStudents gs_tmp;
 	gs_tmp.st_vec = st_vec;
 	gs_tmp.sort(0, st_vec.size()-1);
-	gs_tmp.display(); */
-	this->sort(0, st_vec.size()-1);
-	this->display();
+	gs_tmp.display();
+	//this->sort(0, st_vec.size()-1);
+	//this->display();
 }
 
 void GroupOfStudents::display_highest() {
@@ -70,10 +70,9 @@ void GroupOfStudents::display_highest() {
 	}
 }
 
-void GroupOfStudents::write_to_file() {
-	string path = "Prosek_Student.txt";
+void GroupOfStudents::write_to_file(string path) {
 	std::ofstream f;
-	f.open(path);
+	f.open(path + ".txt");
 	for (int i = 0; i < st_vec.size(); i++)
 	{
 		f << st_vec[i].get_student().get_id() << " " << st_vec[i].get_student().get_first_name() << " " << st_vec[i].get_student().get_last_name() << " " << st_vec[i].get_courses().get_final_score() << " " << st_vec[i].get_courses().get_letter_grade() << "\n";
@@ -89,24 +88,20 @@ char* string_to_char(string s) {
 	return c;
 }
 
-void GroupOfStudents::write_to_bin() {
-	std::ofstream f("Prosek_Student_Binarno.bin", std::ios::binary);
+void GroupOfStudents::write_to_bin(string path) {
+	std::ofstream f(path + ".bin", std::ios::binary);
 	for (int i = 0; i < st_vec.size(); i++)
 	{
 		string s = st_vec[i].get_student().get_id();
-		char* tmp;
-		tmp = string_to_char(s);
-		f.write(tmp, sizeof(char[100]));
+		f << s << " ";
 		s = st_vec[i].get_student().get_first_name();
-		tmp = string_to_char(s);
-		f.write(tmp, sizeof(char[100]));
+		f << s << " ";
 		s = st_vec[i].get_student().get_last_name();
-		tmp = string_to_char(s);
-		f.write(tmp, sizeof(char[100]));
+		f << s << " ";
 		double sc = st_vec[i].get_courses().get_final_score();
-		f.write((char*)&sc,sizeof(double));
+		f << sc << " ";
 		char c = st_vec[i].get_courses().get_letter_grade();
-		f.write((char*)&c, sizeof(char));
+		f << c << std::endl;
 	}
 	f.close();
 }

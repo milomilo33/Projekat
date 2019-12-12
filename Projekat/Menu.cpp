@@ -17,6 +17,7 @@
 #undef vector
 
 void Menu::display_menu() const{
+	std::cout << std::endl;
 	std::cout << "Izaberite jednu od opcija:" << std::endl;
 	std::cout << "1. Prikazi osnovne informacije o autorima" << std::endl;
 	std::cout << "2. Ucitaj studente iz datoteke" << std::endl;
@@ -29,10 +30,11 @@ void Menu::display_menu() const{
 }
 
 void Menu::display_info() const {
+	std::cout << std::endl;
 	std::cout << "Autori(Prezime/Ime, Indeks):" << std::endl;
-	std::cout << "Jovin Vladimir, SW-30-2018" << std::endl;
-	std::cout << "Petljanski Jovan, SW-31-2018" << std::endl;
-	std::cout << "Milovanovic Milovan, SW-41-2018\n" << std::endl;
+	std::cout << "Jovin Vladimir, SW30/2018" << std::endl;
+	std::cout << "Petljanski Jovan, SW31/2018" << std::endl;
+	std::cout << "Milovanovic Milovan, SW41/2018\n" << std::endl;
 }
 
 bool Menu::is_id_valid(string id) const {
@@ -42,7 +44,7 @@ bool Menu::is_id_valid(string id) const {
 
 void Menu::read_students() {
 	//hard-coded filename
-	std::ifstream infile("example.txt");
+	std::ifstream infile(filename);
 
 	if (infile.is_open()) {
 		std::vector<StudentCourses> st_vec;
@@ -129,7 +131,6 @@ void Menu::read_students() {
 }
 
 void Menu::read_students_binary() {
-	string filename = "example.bin";
 	std::ifstream bin_file(filename, std::ios_base::binary);
 
 	if (!bin_file) throw InvalidFile();
@@ -142,7 +143,7 @@ void Menu::read_students_binary() {
 		int word_count = 0;
 		string firstName, lastName, sID;
 		while (bin_file.read(as_bytes(c), sizeof(char))) {
-			if (c != ' ' && c != '\n')
+			if (c != ' ' && c != '\r')
 				word += c;
 			else {
 				word_count++;
@@ -150,7 +151,7 @@ void Menu::read_students_binary() {
 					firstName = word;
 				else if (word_count == 2 && c == ' ')
 					lastName = word;
-				else if (word_count == 3 && c == '\n') {
+				else if (word_count == 3 && c == '\r') {
 					sID = word;
 					break;
 				}
@@ -160,11 +161,12 @@ void Menu::read_students_binary() {
 		}
 		if (word_count != 3 || !is_id_valid(sID)) throw InvalidData();
 		Student stud(firstName, lastName, sID);
+		bin_file.read(as_bytes(c), sizeof(char));
 
 		std::vector<int> homework;
 		word = "";
 		while (bin_file.read(as_bytes(c), sizeof(char))) {
-			if (c != ' ' && c != '\n')
+			if (c != ' ' && c != '\r')
 				word += c;
 			else {
 				try {
@@ -176,16 +178,17 @@ void Menu::read_students_binary() {
 					throw InvalidData();
 				}
 				word = "";
-				if (c == '\n')
+				if (c == '\r')
 					break;
 			}
 		}
 		if (homework.size() != Courses::NUM_HW) throw InvalidData();
+		bin_file.read(as_bytes(c), sizeof(char));
 
 		std::vector<int> test;
 		word = "";
 		while (bin_file.read(as_bytes(c), sizeof(char))) {
-			if (c != ' ' && c != '\n')
+			if (c != ' ' && c != '\r')
 				word += c;
 			else {
 				try {
@@ -197,16 +200,17 @@ void Menu::read_students_binary() {
 					throw InvalidData();
 				}
 				word = "";
-				if (c == '\n')
+				if (c == '\r')
 					break;
 			}
 		}
 		if (test.size() != Courses::NUM_TESTS) throw InvalidData();
+		bin_file.read(as_bytes(c), sizeof(char));
 
 		std::vector<int> quiz;
 		word = "";
 		while (bin_file.read(as_bytes(c), sizeof(char))) {
-			if (c != ' ' && c != '\n')
+			if (c != ' ' && c != '\r')
 				word += c;
 			else {
 				try {
@@ -218,11 +222,12 @@ void Menu::read_students_binary() {
 					throw InvalidData();
 				}
 				word = "";
-				if (c == '\n')
+				if (c == '\r')
 					break;
 			}
 		}
 		if (quiz.size() != Courses::NUM_QUIZZES) throw InvalidData();
+		bin_file.read(as_bytes(c), sizeof(char));
 
 		Courses cour(quiz, homework, test);
 		cour.calc_final_score();
@@ -256,4 +261,21 @@ void Menu::display_students_sorted()
 void Menu::display_highest_score() 
 {
 	this->gs.display_highest();
+}
+
+void Menu::set_binary_write() {
+	binary_write = true;
+}
+
+void Menu::set_filename(string fn) {
+	filename = fn;
+}
+
+void Menu::set_out_path(string out) {
+	out_path = out;
+}
+
+void Menu::write() {
+	gs.write_to_file(out_path);
+	if (binary_write) gs.write_to_bin(out_path);
 }

@@ -32,9 +32,11 @@ public:
 private:
 	GroupOfStudents gs;
 	bool binary_write;
+	string filename;
+	string out_path;
 	
 public:
-	Menu() {};
+	Menu() : binary_write(false) {}
 
 	bool is_id_valid(string id) const;
 	void display_menu() const;
@@ -45,6 +47,10 @@ public:
 	void display_student();
 	void display_students_sorted();
 	void display_highest_score();
+	void set_binary_write();
+	void set_filename(string);
+	void write();
+	void set_out_path(string);
 };
 
 #endif /*MENU_H_*/

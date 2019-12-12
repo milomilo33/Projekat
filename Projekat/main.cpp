@@ -15,13 +15,13 @@
 
 using namespace std;
 
-int main()
+int main(int argc, char* argv[])
 {
 	Menu m;
 	int option;
 	locale loc;
 	m.display_menu();
-	
+
 	do
 	{
 		cout << "> ";
@@ -54,8 +54,16 @@ int main()
 		case Menu::READ_FILE:
 			try
 			{
-				//dodati proveru tipa ulazne datoteka, i u zavisnosti od toga pozvati metode za citanje
-				m.read_students();
+				string filename(argv[1]);
+				string type(argv[2]);
+				m.set_filename(filename);
+				if (type == "bin") {
+					m.set_binary_write();
+					m.read_students_binary();
+				}
+				else {
+					m.read_students();
+				}
 			} catch (const Menu::InvalidFile& excp)
 			{
 				cerr << excp.what() << endl;
@@ -77,7 +85,9 @@ int main()
 			m.display_highest_score();
 			break;
 		case Menu::WRITE_FILE:
-			//dodati writeove...
+			string out(argv[3]);
+			m.set_out_path(out);
+			m.write();
 			break;
 		}
 		m.display_menu();

@@ -17,6 +17,7 @@ double StudentCourses::get_final_score() {
 void StudentCourses::display() {
 	student.display();
 	courses.display();
+	std::cout << "============================================================================" << std::endl;
 }
 
 bool StudentCourses::operator<=(StudentCourses sc) {

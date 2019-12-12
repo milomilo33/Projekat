@@ -18,13 +18,13 @@ void Courses::calc_final_score() {
 	double quiz_sum = 0, homework_sum = 0, test_sum = 0;
 	for (int i = 0; i < NUM_QUIZZES; ++i)
 		quiz_sum += quiz[i];
-	double quiz_percentage = quiz_sum / NUM_QUIZZES;
+	double quiz_percentage = quiz_sum / NUM_QUIZZES * QUIZ_WEIGHT;
 	for (int i = 0; i < NUM_HW; ++i)
 		homework_sum += homework[i];
-	double homework_percentage = homework_sum / NUM_HW;
+	double homework_percentage = homework_sum / NUM_HW * HOMEWORK_WEIGHT;
 	for (int i = 0; i < NUM_TESTS; ++i)
 		test_sum += test[i];
-	double test_percentage = test_sum / NUM_TESTS;
+	double test_percentage = test_sum / NUM_TESTS * TEST_WEIGHT;
 
 	final_score = quiz_percentage + homework_percentage + test_percentage;
 }
