@@ -41,6 +41,9 @@ public:
 	void display() const;
 	void calc_final_score();
 	void calc_letter_grade();
+	vector<int> get_quiz();
+	vector<int> get_homework();
+	vector<int> get_test();
 };
 
 

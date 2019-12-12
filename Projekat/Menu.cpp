@@ -42,7 +42,7 @@ bool Menu::is_id_valid(string id) const {
 
 void Menu::read_students() {
 	//hard-coded filename
-	std::ifstream infile("example.txt");
+	std::ifstream infile("ulaz.txt");
 
 	if (infile.is_open()) {
 		std::vector<StudentCourses> st_vec;

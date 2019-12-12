@@ -42,6 +42,21 @@ void Courses::calc_letter_grade() {
 		letter_grade = 'F';
 }
 
+vector<int> Courses::get_quiz()
+{
+	return this->quiz;
+}
+
+vector<int> Courses::get_homework()
+{
+	return this->homework;
+}
+
+vector<int> Courses::get_test()
+{
+	return this->test;
+}
+
 void Courses::display() const {
 	std::cout << "Broj bodova: " << final_score << " Ocena: " << letter_grade << std::endl;
 }

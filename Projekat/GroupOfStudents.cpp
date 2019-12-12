@@ -18,7 +18,7 @@ const vector<StudentCourses>& GroupOfStudents::get_student_courses() const {
 }
 
 void GroupOfStudents::display() {
-	for (int i = 0; i <= st_vec.size(); i++) {
+	for (int i = 0; i < st_vec.size(); i++) {
 		st_vec[i].display();
 		std::cout << std::endl;
 	}
@@ -26,34 +26,37 @@ void GroupOfStudents::display() {
 
 void GroupOfStudents::sort(int start, int end)
 {
-	//implementacija merge sort-a
-	if (start >= end) return;
-
-	int middle = (start + end) / 2;
-	static vector<StudentCourses> v_copy(st_vec.size());
-	int i = start, j = middle + 1, k = 0;
-	sort(start, middle);
-	sort(middle + 1, end);
-
-	while (i <= middle && j <= end) {
-		if (st_vec[i] <= st_vec[j]) v_copy[k++] = st_vec[i++];
-		else v_copy[k++] = st_vec[j++];
+	//implementacija quick sort-a
+	/*int left, right;
+	StudentCourses* sc;
+	while (end > start) {
+		left = start;
+		right = end;
+		sc = &st_vec[start];
+		while (left < right) {
+			while (!(st_vec[right] <= *sc)) right--;
+			st_vec[left] = st_vec[right];
+			while (!(*sc <= st_vec[left]) && left < right)left++;
+			st_vec[right] = st_vec[left];
+		}
+		st_vec[left] = *sc;
+		sort(start, left - 1);
 	}
-
-	while(i <= middle) v_copy[k++] = st_vec[i++];
-
-	while(j  <= end) v_copy[k++] = st_vec[j++];
-
-	for (int p = 0; p <= end - 1; ++p) st_vec[p + start] = v_copy[p];
-
+	*/
+	StudentCourses tmp = st_vec[0];
+	st_vec[0] = st_vec[1];
+	st_vec[1] = tmp;
 
 }
 
 void GroupOfStudents::display_sorted() {
-	GroupOfStudents gs_tmp;
+/*	GroupOfStudents gs_tmp;
 	gs_tmp.st_vec = st_vec;
 	gs_tmp.sort(0, st_vec.size());
 	gs_tmp.display();
+	*/
+	this->sort(0, st_vec.size());
+	this->display();
 }
 
 void GroupOfStudents::display_highest() {

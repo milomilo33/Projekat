@@ -29,6 +29,7 @@ public:
 	string get_last_name() const;
 	string get_id() const;
 	void display() const;
+
 };
 
 #endif /*STUDENT_H_*/
