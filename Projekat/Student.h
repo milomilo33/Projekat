@@ -24,6 +24,7 @@ private:
 
 public:
 	Student();
+	Student(const Student& old);
 	Student(string firstName, string lastName, string ID);
 	string get_first_name() const;
 	string get_last_name() const;

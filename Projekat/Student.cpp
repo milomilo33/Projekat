@@ -10,6 +10,13 @@
 
 Student::Student() {}
 
+Student::Student(const Student& old)
+{
+	this->firstName = old.firstName;
+	this->lastName = old.lastName;
+	this->ID = old.ID;
+}
+
 Student::Student(string firstName,string lastName,string ID) {
 	this->firstName = firstName;
 	this->lastName = lastName;
