@@ -49,3 +49,18 @@ void Courses::display() const {
 char Courses::get_letter_grade() const {
 	return letter_grade;
 }
+
+vector<int> Courses::get_quiz()
+{
+	return this->quiz;
+}
+
+vector<int> Courses::get_homework()
+{
+	return this->homework;
+}
+
+vector<int> Courses::get_test()
+{
+	return this->test;
+}

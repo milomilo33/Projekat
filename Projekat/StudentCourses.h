@@ -18,6 +18,7 @@ class StudentCourses
 	Student student;
 	Courses courses;
 public:
+	StudentCourses(const StudentCourses& old);
 	StudentCourses() {};
 	StudentCourses(Student& s, Courses& c) : student(s), courses(c) {}
 	Student get_student() const;
@@ -25,6 +26,8 @@ public:
 	double get_final_score();
 	void display();
 	bool operator<=(StudentCourses sc);
+	StudentCourses& operator=(const StudentCourses& old);
+
 };
 
 #endif

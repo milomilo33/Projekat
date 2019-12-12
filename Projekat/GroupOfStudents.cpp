@@ -18,7 +18,7 @@ const vector<StudentCourses>& GroupOfStudents::get_student_courses() const {
 }
 
 void GroupOfStudents::display() {
-	for (int i = 0; i <= st_vec.size(); i++) {
+	for (int i = 0; i < st_vec.size(); i++) {
 		st_vec[i].display();
 		std::cout << std::endl;
 	}
@@ -30,7 +30,7 @@ void GroupOfStudents::sort(int start, int end)
 	if (start >= end) return;
 
 	int middle = (start + end) / 2;
-	static vector<StudentCourses> v_copy(st_vec.size());
+	static vector<StudentCourses> v_copy(2*st_vec.size());
 	int i = start, j = middle + 1, k = 0;
 	sort(start, middle);
 	sort(middle + 1, end);
@@ -44,16 +44,18 @@ void GroupOfStudents::sort(int start, int end)
 
 	while(j  <= end) v_copy[k++] = st_vec[j++];
 
-	for (int p = 0; p <= end - 1; ++p) st_vec[p + start] = v_copy[p];
+	for (int p = 0; p <= end - start; ++p) st_vec[p + start] = v_copy[p];
 
 
 }
 
 void GroupOfStudents::display_sorted() {
-	GroupOfStudents gs_tmp;
+	/*GroupOfStudents gs_tmp;
 	gs_tmp.st_vec = st_vec;
-	gs_tmp.sort(0, st_vec.size());
-	gs_tmp.display();
+	gs_tmp.sort(0, st_vec.size()-1);
+	gs_tmp.display(); */
+	this->sort(0, st_vec.size()-1);
+	this->display();
 }
 
 void GroupOfStudents::display_highest() {
