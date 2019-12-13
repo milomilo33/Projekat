@@ -271,6 +271,10 @@ void Menu::set_filename(string fn) {
 	filename = fn;
 }
 
+string Menu::get_filename() {
+	return filename;
+}
+
 void Menu::set_out_path(string out) {
 	out_path = out;
 }

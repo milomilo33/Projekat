@@ -64,6 +64,7 @@ int main(int argc, char* argv[])
 				else {
 					m.read_students();
 				}
+				cout << endl << "Uspesno ucitana datoteka." << endl;
 			} catch (const Menu::InvalidFile& excp)
 			{
 				cerr << excp.what() << endl;
@@ -85,9 +86,24 @@ int main(int argc, char* argv[])
 			m.display_highest_score();
 			break;
 		case Menu::WRITE_FILE:
-			string out(argv[3]);
+			string out;
+			if (argc == 4) {
+				string tmp(argv[3]);
+				out = tmp;
+			}
+			else {
+				string input_fn = m.get_filename();
+				for (int i = input_fn.size() - 1; i >= 0; --i) {
+					if (input_fn[i] == '.') {
+						out = input_fn.substr(0, i);
+						break;
+					}
+				}
+				out += "_izlaz";
+			}
 			m.set_out_path(out);
 			m.write();
+			cout << endl << "Uspesno upisano u datoteku." << endl;
 			break;
 		}
 		m.display_menu();

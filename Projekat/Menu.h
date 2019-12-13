@@ -49,6 +49,7 @@ public:
 	void display_highest_score();
 	void set_binary_write();
 	void set_filename(string);
+	string get_filename();
 	void write();
 	void set_out_path(string);
 };

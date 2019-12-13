@@ -71,6 +71,7 @@ void GroupOfStudents::display_highest() {
 }
 
 void GroupOfStudents::write_to_file(string path) {
+	sort(0, st_vec.size() - 1);
 	std::ofstream f;
 	f.open(path + ".txt");
 	for (int i = 0; i < st_vec.size(); i++)
@@ -90,6 +91,7 @@ char* string_to_char(string s) {
 
 void GroupOfStudents::write_to_bin(string path) {
 	std::ofstream f(path + ".bin", std::ios::binary);
+
 	for (int i = 0; i < st_vec.size(); i++)
 	{
 		string s = st_vec[i].get_student().get_id();
